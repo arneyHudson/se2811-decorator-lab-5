@@ -20,21 +20,20 @@ import java.util.Map;
 
 /**
  * The controller for the main window.
- *
+ * <p>
  * Also manages the networks.
  */
 public class SimpleCanvasController {
     @FXML
     private ToggleGroup network;
     @FXML
-
     private Canvas canvas;
 
-    private Map<String, Network> displayable_networks = new HashMap<>();
+    private final Map<String, Network> displayable_networks = new HashMap<>();
 
     @FXML
     private void showNetwork(ActionEvent actionEvent) {
-        ToggleButton source = (ToggleButton)actionEvent.getSource();
+        ToggleButton source = (ToggleButton) actionEvent.getSource();
         String id = source.getId();
         System.out.println("id = " + id);
         // Clear Canvas: https://stackoverflow.com/q/27203671/1048186
@@ -43,10 +42,10 @@ public class SimpleCanvasController {
         System.out.println("canvas.getHeight() = " + canvas.getHeight());
         context.setLineWidth(3);
         context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        if(!displayable_networks.containsKey(id)) {
-            System.out.println("Warning: Unknown network id:"+id);
+        if (!displayable_networks.containsKey(id)) {
+            System.out.println("Warning: Unknown network id:" + id);
         } else {
-            System.out.println("DEBUG: Drawing network: "+id);
+            System.out.println("DEBUG: Drawing network: " + id);
             Network network = displayable_networks.get(id);
             network.draw(canvas);
         }
@@ -61,19 +60,27 @@ public class SimpleCanvasController {
     /**
      * As client code, use the decorator classes to construct the inception-like network,
      * as described in the lab.
+     *
      * @return network The network created.
      */
     private Network createInception() {
-        return null; // TODO return the network
+        // TODO return the network
+        Network network = new Network();
+        network.draw(canvas);
+        return network;
     }
 
     /**
      * As client code, use the decorator classes to construct the AlexNet-like network,
      * as described in the lab.
+     *
      * @return network The network created.
      */
     private Network createAlexNet() {
-        return null; // TODO return the network
+        // TODO return the network
+        Network network = new Network();
+        network.draw(canvas);
+        return network;
     }
 
 }

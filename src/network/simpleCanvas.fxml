@@ -4,22 +4,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="networks.SimpleCanvasController">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="network.SimpleCanvasController">
    <top>
       <ToolBar prefHeight="40.0" BorderPane.alignment="CENTER">
         <items>
-            <ToggleButton fx:id="alexLike" text="AlexNet-Like" onAction="#showNetwork">
+            <ToggleButton fx:id="alexLike" onAction="#showNetwork" text="AlexNet-Like">
                <toggleGroup>
                   <ToggleGroup fx:id="network" />
                </toggleGroup>
             </ToggleButton>
-            <ToggleButton fx:id="inceptionLike" text="Inception-Like"
-                          toggleGroup="$network" onAction="#showNetwork">
+            <ToggleButton fx:id="inceptionLike" onAction="#showNetwork" text="Inception-Like" toggleGroup="$network">
             </ToggleButton>
         </items>
       </ToolBar>
    </top>
    <center>
-      <Canvas fx:id="canvas" width="850" height="650" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="canvas" height="650" width="850" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

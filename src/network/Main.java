@@ -25,7 +25,7 @@ public class Main extends Application {
             primaryStage.setScene(new Scene(root, 850, 650));
             primaryStage.show();
         } catch(Exception e) {
-            System.out.println("Class Not Found");
+            System.out.println("No controller could be found");
         }
     }
 
