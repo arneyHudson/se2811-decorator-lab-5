@@ -21,10 +21,10 @@ public class FullyConnectedLayer extends NetworkLayer {
      */
     public FullyConnectedLayer(NetworkLayer network, int numNodes) {
         super(network, network.x);
-        double y = (CANVAS_HEIGHT / 2) - (numNodes * SPACING);
+        double y = (CANVAS_HEIGHT / 2) - (numNodes * NODE_SPACING);
         for (int i = 0; i < numNodes; i++) {
-            nodeList.add(new NetworkNode(x, y, previousNetworkList));
-            y += SPACING;
+            nodeList.add(new NetworkNode(x, y, prevNetworkList));
+            y += NODE_SPACING;
         }
     }
 }

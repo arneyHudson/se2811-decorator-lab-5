@@ -21,25 +21,25 @@ import java.util.List;
 public abstract class NetworkLayer {
 
     protected List<Node> nodeList;
-    protected List<Node> previousNetworkList;
-    protected NetworkLayer previousNetwork;
+    protected List<Node> prevNetworkList;
+    protected NetworkLayer prevLayer;
     protected double x;
-    protected final double CANVAS_HEIGHT = 650;
-    protected final int SPACING = 55;
+    protected final double CANVAS_HEIGHT = 700;
+    protected final int NODE_SPACING = 55;
 
     /**
 
      Constructor for the NetworkLayer class.
-     @param previousNetwork The previous layer that the current layer is connected to.
-     @param x The x-coordinate of the current layer.
+     @param prevLayer The previous layer that the current layer is connected to.
+     @param coordX The x-coordinate of the current layer.
      */
-    public NetworkLayer(NetworkLayer previousNetwork, double x) {
+    public NetworkLayer(NetworkLayer prevLayer, double coordX) {
         nodeList = new ArrayList<>();
-        if(previousNetwork != null) {
-            this.previousNetworkList = previousNetwork.getNodeList();
+        if(prevLayer != null) {
+            this.prevNetworkList = prevLayer.getNodeList();
         }
-        this.previousNetwork = previousNetwork;
-        this.x = x + SPACING;
+        this.prevLayer = prevLayer;
+        this.x = coordX + NODE_SPACING;
     }
     /**
      Getter for the node list of the current layer.
@@ -56,8 +56,8 @@ public abstract class NetworkLayer {
      @param canvas The canvas on which the network should be drawn.
      */
     public void draw(Canvas canvas) {
-        if(previousNetwork != null) {
-            previousNetwork.draw(canvas);
+        if(prevLayer != null) {
+            prevLayer.draw(canvas);
         }
         for(Node n : nodeList) {
             n.drawNode(canvas);

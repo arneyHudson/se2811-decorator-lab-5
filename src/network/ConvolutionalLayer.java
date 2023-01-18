@@ -22,7 +22,7 @@ public class ConvolutionalLayer extends NetworkLayer {
      */
     public ConvolutionalLayer(NetworkLayer previousNetwork) {
         super(previousNetwork, previousNetwork.x);
-        for (Node node : previousNetworkList) {
+        for (Node node : prevNetworkList) {
             ArrayList<Node> list = new ArrayList<>();
             list.add(node);
             nodeList.add(new NetworkNode(x, node.getY(), list));
