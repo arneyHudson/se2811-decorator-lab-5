@@ -1,12 +1,12 @@
-package network;
 /*
  * Course:     SE 2811
  * Term:       Winter 2022-23
  * Assignment: Lab 5: Decorators
- * Author:     MSOE Faculty and Hudson Arney
- * Date:       1/11/2023
+ * Author:     Hudson Arney
+ * Date:       1/17/2023
  */
 
+package network;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,46 +15,37 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * The controller for the main window.
  * <p>
  * Also manages the networks.
  */
 public class SimpleCanvasController {
-    @FXML
-    private ToggleGroup network;
+    public ToggleButton alexLike;
+    public ToggleButton inceptionLike;
+    public ToggleButton hudsonLike;
     @FXML
     private Canvas canvas;
 
-    private final Map<String, Network> displayable_networks = new HashMap<>();
-
     @FXML
-    private void showNetwork(ActionEvent actionEvent) {
-        ToggleButton source = (ToggleButton) actionEvent.getSource();
-        String id = source.getId();
-        System.out.println("id = " + id);
-        // Clear Canvas: https://stackoverflow.com/q/27203671/1048186
-        GraphicsContext context = canvas.getGraphicsContext2D();
-        System.out.println("canvas.getWidth() = " + canvas.getWidth());
-        System.out.println("canvas.getHeight() = " + canvas.getHeight());
-        context.setLineWidth(3);
-        context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        if (!displayable_networks.containsKey(id)) {
-            System.out.println("Warning: Unknown network id:" + id);
-        } else {
-            System.out.println("DEBUG: Drawing network: " + id);
-            Network network = displayable_networks.get(id);
+    private void showNetwork() {
+        NetworkLayer network = null;
+        if(alexLike.isSelected()) {
+            network = createAlexNet();
+        } else if (inceptionLike.isSelected()) {
+            network = createInception();
+        } else if(hudsonLike.isSelected()) {
+            network = createHudsonNetwork();
+        }
+
+        if (network != null) {
+            clearCanvas();
             network.draw(canvas);
         }
     }
 
     @FXML
     private void initialize() {
-        displayable_networks.put("alexLike", createAlexNet());
-        displayable_networks.put("inceptionLike", createInception());
     }
 
     /**
@@ -63,10 +54,12 @@ public class SimpleCanvasController {
      *
      * @return network The network created.
      */
-    private Network createInception() {
-        // TODO return the network
-        Network network = new Network();
-        network.draw(canvas);
+    private NetworkLayer createInception() {
+        double x = 10;
+        NetworkLayer network = new IdentityLayer(x, 3);
+        network = new ConvolutionalLayer(network);
+        network = new ConvolutionalLayer(network);
+        network = new ConvolutionalLayer(network);
         return network;
     }
 
@@ -76,11 +69,37 @@ public class SimpleCanvasController {
      *
      * @return network The network created.
      */
-    private Network createAlexNet() {
-        // TODO return the network
-        Network network = new Network();
-        network.draw(canvas);
+    private NetworkLayer createAlexNet() {
+        double x = 10;
+        NetworkLayer network = new IdentityLayer(x, 4);
+        network = new ConvolutionalLayer(network);
+        network = new ConvolutionalLayer(network);
+        network = new FullyConnectedLayer(network, 4);
+        network = new FullyConnectedLayer(network, 3);
         return network;
+    }
+
+    private NetworkLayer createHudsonNetwork() {
+        double x = 20;
+        NetworkLayer network = new IdentityLayer(x, 4);
+        network = new FullyConnectedLayer(network, 3);
+        network = new ConvolutionalLayer(network);
+        network = new FullyConnectedLayer(network, 2);
+        network = new ConvolutionalLayer(network);
+        network = new FullyConnectedLayer(network, 1);
+        network = new ConvolutionalLayer(network);
+        network = new FullyConnectedLayer(network, 2);
+        network = new ConvolutionalLayer(network);
+        network = new FullyConnectedLayer(network, 3);
+        network = new ConvolutionalLayer(network);
+        network = new FullyConnectedLayer(network, 4);
+        network = new ConvolutionalLayer(network);
+        return network;
+    }
+
+    private void clearCanvas() {
+        GraphicsContext context = canvas.getGraphicsContext2D();
+        context.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
 }
