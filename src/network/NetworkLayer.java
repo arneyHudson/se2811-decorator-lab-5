@@ -24,7 +24,7 @@ public abstract class NetworkLayer {
     protected List<Node> prevNetworkList;
     protected NetworkLayer prevLayer;
     protected double x;
-    protected final double CANVAS_HEIGHT = 700;
+    protected final double CANVAS_HEIGHT = 650;
     protected final int NODE_SPACING = 55;
 
     /**

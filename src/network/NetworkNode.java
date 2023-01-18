@@ -69,6 +69,7 @@ public class NetworkNode implements Node {
                 Point2D end = p2.subtract(radius);
                 graphicsContext.strokeLine(start.getX(), start.getY(), end.getX(), end.getY());
 
+
                 double arrowLength = 5;
                 double angle = Math.atan2(p2.getY() - p1.getY(), p2.getX() - p1.getX());
                 double x1 = start.getX() + arrowLength * Math.cos(angle + Math.PI / 6);
@@ -76,6 +77,8 @@ public class NetworkNode implements Node {
                 double x2 = start.getX() + arrowLength * Math.cos(angle - Math.PI / 6);
                 double y2 = start.getY() + arrowLength * Math.sin(angle - Math.PI / 6);
                 graphicsContext.strokePolygon(new double[]{start.getX(), x1, x2}, new double[]{start.getY(), y1, y2}, 3);
+
+
             }
         }
     }
