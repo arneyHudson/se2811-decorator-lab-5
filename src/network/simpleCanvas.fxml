@@ -15,6 +15,8 @@
             </ToggleButton>
             <ToggleButton fx:id="inceptionLike" onAction="#showNetwork" text="Inception-Like" toggleGroup="$network">
             </ToggleButton>
+            <ToggleButton fx:id="hudsonLike" onAction="#showNetwork" text="Custom-Hudson-Network" toggleGroup="$network">
+            </ToggleButton>
         </items>
       </ToolBar>
    </top>

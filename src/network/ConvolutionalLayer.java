@@ -1,20 +1,31 @@
+/*
+ * Course:     SE 2811
+ * Term:       Winter 2022-23
+ * Assignment: Lab 5: Decorators
+ * Author:     Hudson Arney
+ * Date:       1/17/2023
+ */
+
 package network;
 
 import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * The ConvolutionalLayer class represents a layer in a convolutional neural network visualization.
+ * It extends the NetworkLayer class and has a list of nodes (nodeList) that are connected to the nodes in the previous network layer (previousNetwork).
+ *
+ */
 public class ConvolutionalLayer extends NetworkLayer {
-
-    private double x;
-
-    public ConvolutionalLayer(List<Node> nodeList, NetworkLayer previousNetwork, double x) {
-        super(nodeList, previousNetwork);
-        this.x = x;
-        double yCount = 325;
-        for (Node n: previousNetwork.getNodeList()) {
+    /**
+     * Constructor for the ConvolutionalLayer class.
+     * @param previousNetwork The previous network layer that this layer is connected to.
+     */
+    public ConvolutionalLayer(NetworkLayer previousNetwork) {
+        super(previousNetwork, previousNetwork.x);
+        for (Node node : previousNetworkList) {
             ArrayList<Node> list = new ArrayList<>();
-            list.add(n);
-            nodeList.add(new ConvolutionalNode(x, yCount, list));
+            list.add(node);
+            nodeList.add(new NetworkNode(x, node.getY(), list));
         }
     }
 }
